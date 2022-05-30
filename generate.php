@@ -23,7 +23,7 @@ fgetcsv($csvPrezzi);
 while (($line = fgetcsv($csvPrezzi, 0, ';')) !== false) {
     $idimpianto = $line[0];
     $tipo = $line[1];
-    $prezzo = (int)$line[2] / 1000;
+    $prezzo = (float)$line[2];
     $isSelf = (int)$line[3];
     $ultimo_aggiornamento = $line[4];
     
