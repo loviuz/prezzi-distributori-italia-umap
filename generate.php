@@ -1,7 +1,14 @@
 <?php
 
-file_put_contents('anagrafica_impianti_attivi.csv', file_get_contents('https://www.mise.gov.it/images/exportCSV/anagrafica_impianti_attivi.csv'));
-file_put_contents('prezzo_alle_8.csv', file_get_contents('https://www.mise.gov.it/images/exportCSV/prezzo_alle_8.csv'));
+include 'vendor/autoload.php';
+
+$client = new \GuzzleHttp\Client();
+
+$response = $client->request('GET', 'http://www.mise.gov.it/images/exportCSV/anagrafica_impianti_attivi.csv');
+file_put_contents('anagrafica_impianti_attivi.csv', $response->getBody() );
+
+$response = $client->request('GET', 'http://www.mise.gov.it/images/exportCSV/prezzo_alle_8.csv');
+file_put_contents('prezzo_alle_8.csv', $response->getBody());
 
 // Header file geojson finale
 $geojson = [
@@ -90,6 +97,11 @@ while(($line = fgetcsv($csvDistributori, 0,  ';')) !== FALSE){
 // Chiusura CSV originale
 fclose($csvDistributori);
 
+$json_response = json_encode($geojson, JSON_PRETTY_PRINT);
 
 // Salvataggio file geojson
-file_put_contents( 'data.geojson', json_encode($geojson, JSON_PRETTY_PRINT) );
+if (isset($_GET['response'])) {
+	echo $json_response;
+} else {
+	file_put_contents( 'data.geojson', $json_response );
+}
