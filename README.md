@@ -1,4 +1,6 @@
 # Prezzi Distributori Italia uMap
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Floviuz%2Fprezzi-distributori-italia-umap.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Floviuz%2Fprezzi-distributori-italia-umap?ref=badge_shield)
+
 Script per la generazione di un file in formato GeoJSON da importare su uMap per la visualizzazione dei distributori con i prezzi provenienti dal MISE.
 
 ## Come funziona
@@ -16,3 +18,6 @@ https://umap.openstreetmap.fr/it/map/prezzi-distributori-italia_769756
 - [ ] generazione file distinti per Benzina, Diesel, GPL e altre tipologie
 - [ ] colorazione marker in base al tipo di carburante
 - [ ] aggiunta elementi grafici (loghi, ecc)
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Floviuz%2Fprezzi-distributori-italia-umap.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Floviuz%2Fprezzi-distributori-italia-umap?ref=badge_large)
