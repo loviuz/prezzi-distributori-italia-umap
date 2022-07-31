@@ -1,0 +1,46 @@
+{
+  "type": "umap",
+  "uri": "https://umap.openstreetmap.fr/it/map/prezzi-distributori-italia_792885#8/44.721/12.063",
+  "properties": {
+    "easing": true,
+    "measureControl": null,
+    "embedControl": true,
+    "fullscreenControl": true,
+    "locateControl": true,
+    "searchControl": true,
+    "datalayersControl": true,
+    "zoomControl": true,
+    "longCredit": "Open Data del MISE:\nhttps://www.mise.gov.it/index.php/it/open-data/elenco-dataset/2032336-carburanti-prezzi-praticati-e-anagrafica-degli-impianti",
+    "shortCredit": "MISE",
+    "showLabel": true,
+    "slideshow": [],
+    "captionBar": false,
+    "zoomTo": 14,
+    "popupContentTemplate": "# {name}\n{description}",
+    "popupShape": "Large",
+    "smoothFactor": "2.5",
+    "iconUrl": "/uploads/pictogram/fuel-24_1.png",
+    "iconClass": "Drop",
+    "color": "Blue",
+    "limitBounds": [],
+    "tilelayer": [],
+    "licence": "",
+    "description": "# ℹ️ ISTRUZIONI\n1. Diminuisci l'area di visualizzazione centrando la mappa nella tua posizione\n2. Clicca sull'icona simile a dei dischi sovrapposti per scegliere il tipo di carburante\n3. Trova il distributore più vantaggioso 😉\nATTENZIONE: la mappa contiene tutti i distributori d'Italia per cui alla selezione del tipo di carburante potrebbe essere un po' lento a caricare i dati.\n",
+    "name": "Distributori prezzi Italia",
+    "onLoadPanel": "caption",
+    "displayPopupFooter": false,
+    "miniMap": false,
+    "moreControl": true,
+    "scaleControl": true,
+    "scrollWheelZoom": true,
+    "zoom": 6
+  },
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      12.063,
+      44.721
+    ]
+  },
+  "layers": []
+}
