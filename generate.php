@@ -1,7 +1,7 @@
 <?php
 
 include 'vendor/autoload.php';
-/*
+
 $client = new \GuzzleHttp\Client();
 
 $response = $client->request('GET', 'http://www.mise.gov.it/images/exportCSV/anagrafica_impianti_attivi.csv');
@@ -9,7 +9,7 @@ file_put_contents('anagrafica_impianti_attivi.csv', $response->getBody() );
 
 $response = $client->request('GET', 'http://www.mise.gov.it/images/exportCSV/prezzo_alle_8.csv');
 file_put_contents('prezzo_alle_8.csv', $response->getBody());
-*/
+
 // Lettura template file umap
 $umap = json_decode( file_get_contents('template.umap'), 1 );
 
@@ -118,7 +118,6 @@ while(($line = fgetcsv($csvDistributori, 0,  ';')) !== FALSE){
     $name = $line[2];
     $lat = $line[8] !== 'NULL' ? $line[8] : null;
     $lon = $line[9] !== 'NULL' ? $line[9] : null;
-    $ultimo_aggiornamento = '';
     $description = [];
 
     if (!empty($lat) && !empty($lon)) {
@@ -133,7 +132,7 @@ while(($line = fgetcsv($csvDistributori, 0,  ';')) !== FALSE){
 
                 $prezzi_per_tipo[$tipo_raggruppato][$idimpianto][$tipo] = [
                     'idimpianto' => $idimpianto,
-                    'ultimo_aggiornamento' => $ultimo_aggiornamento,
+                    'ultimo_aggiornamento' => $prezzo['ultimo_aggiornamento'],
                     'nome' => $name,
                     'prezzo' => (float)$prezzo['prezzo'],
                     'lat' => $lat,
@@ -166,7 +165,7 @@ foreach ($prezzi_per_tipo as $tipo_raggruppato => $idimpianti) {
             "type" => "Feature",
             "properties" => [
                 "idImpianto" => $idimpianto,
-                'description' => "**".$impianto['nome']."**\n".implode("\n", $descriptions)."\n*Ultimo agg.: ".$ultimo_aggiornamento.'*',
+                'description' => "**".$impianto['nome']."**\n".implode("\n", $descriptions)."\n*Ultimo agg.: ".$impianto['ultimo_aggiornamento'].'*',
                 'name' => min($prezzi).' - '.max($prezzi).' €'
             ],
             "geometry" => [
