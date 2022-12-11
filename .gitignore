@@ -3,3 +3,4 @@ composer.lock
 *.csv
 vendor
 data.umap
+.vscode

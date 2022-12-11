@@ -130,7 +130,7 @@ while (($line = fgetcsv($csvDistributori, 0, ';')) !== false) {
             foreach ($prezzi[$idimpianto] as $idx => $prezzo) {
                 $tipo = $prezzo['tipo'].($prezzo['isSelf'] ? ' (self)' : ' (servito)');
                 $tipo_raggruppato = $raggruppamenti[ $tipo ];
-                $giorni_ritardo_aggiornamento = strtotime($ultimo_aggiornamento)/60/60/24 - time()/60/60/24;
+                $giorni_ritardo_aggiornamento = (Carbon\Carbon::rawCreateFromFormat('d/m/Y H:i:s', $prezzo['ultimo_aggiornamento']))->diffInDays(new Carbon\Carbon(), false);
 
                 // Emoji per indicare la data di ultimo aggiornamento
                 $icon = '🔴';
@@ -144,6 +144,7 @@ while (($line = fgetcsv($csvDistributori, 0, ';')) !== false) {
                     'idimpianto' => $idimpianto,
                     'ultimo_aggiornamento' => $prezzo['ultimo_aggiornamento'],
                     'nome' => $name,
+                    'button' => '[[geo:'.$lat.','.$lon.'|🏁 Guidami qui »]]',
                     'icon' => $icon,
                     'prezzo' => (float)$prezzo['prezzo'],
                     'lat' => $lat,
@@ -169,14 +170,14 @@ foreach ($prezzi_per_tipo as $tipo_raggruppato => $idimpianti) {
 
         foreach ($tipi as $tipo => $impianto) {
             $prezzi[] = $impianto['prezzo'];
-            $descriptions[] = $tipo.': '.$impianto['prezzo']."\n";
+            $descriptions[] = '**'.$tipo.':** '.$impianto['prezzo'].' €';
         }
 
         $markers[] = [
             "type" => "Feature",
             "properties" => [
                 "idImpianto" => $idimpianto,
-                'description' => "**".$impianto['nome']."**\n".implode("\n", $descriptions)."\n*Ultimo agg.: ".$impianto['ultimo_aggiornamento'].'*',
+                'description' => "# ".$impianto['nome']."\n*🗓️ ".$impianto['ultimo_aggiornamento']."*\n".implode("\n", $descriptions)."\n\n".$impianto['button'],
                 'name' => $impianto['icon'].' '.min($prezzi).' - '.max($prezzi).' €'
             ],
             "geometry" => [
