@@ -66,7 +66,13 @@ $raggruppamenti_iniziali = [
     'BENZINA ENERGY 98 OTTANI' => 'BENZINA',
     'BENZINA SHELL V POWER' => 'BENZINA',
     'SSP98' => 'BENZINA',
-    'GASOLIO PLUS' => 'GASOLIO'
+    'GASOLIO PLUS' => 'GASOLIO',
+    'HVOLUTION' => 'BIO-DIESEL',
+    'BIO-DIESEL' => 'BIO-DIESEL',
+    'F-101' => 'BENZINA',
+    'GASOLIO PRESTAZIONALE' => 'GASOLIO',
+    'VERDE SPECIALE' => 'BENZINA',
+    'BENZINA 102 OTTANI' => 'BENZINA',
 ];
 
 $raggruppamenti = [];
@@ -81,6 +87,7 @@ $colori_per_tipo = [
     'BENZINA' => '#119429',
     'GPL' => '#d9c800',
     'DIESEL' => '#193cbf',
+    'BIO-DIESEL' => '#1f63df',
     'GASOLIO' => '#0636a5',
     'METANO' => '#067057',
     'GAS' => '#193e92',
