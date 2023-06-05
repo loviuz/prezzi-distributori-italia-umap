@@ -73,6 +73,8 @@ $raggruppamenti_iniziali = [
     'GASOLIO PRESTAZIONALE' => 'GASOLIO',
     'VERDE SPECIALE' => 'BENZINA',
     'BENZINA 102 OTTANI' => 'BENZINA',
+    'HVO100' => 'HVO',
+    'HVO' => 'HVO',
 ];
 
 $raggruppamenti = [];
