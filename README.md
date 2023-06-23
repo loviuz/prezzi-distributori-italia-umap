@@ -9,10 +9,10 @@ I 2 file sono:
 - **prezzo_alle_8.csv**: lista prezzi per idImpianto generati alle 8:00 di ogni mattina
 
 La prima importazione è stata eseguita qui:
-https://umap.openstreetmap.fr/it/map/prezzi-distributori-italia_769756
+https://umap.openstreetmap.fr/it/map/distributori-prezzi-italia_932492
 
 ## Da completare
-- [ ] aggiungere controllo degli errori per debug
+- [ ] aggiungere controllo degli errori pr debug
 - [ ] generazione file distinti per Benzina, Diesel, GPL e altre tipologie
 - [ ] colorazione marker in base al tipo di carburante
 - [ ] aggiunta elementi grafici (loghi, ecc)
