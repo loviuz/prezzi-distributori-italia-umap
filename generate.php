@@ -43,6 +43,7 @@ $raggruppamenti_iniziali = [
     'L-GNC' => 'L-GNC',
     'GNL' => 'GAS',
     'GASOLIO ARTICO' => 'GASOLIO',
+    'GASOLIO ARTICO IGLOO' => 'GASOLIO',
     'BENZINA WR 100' => 'BENZINA',
     'GASOLIO SPECIALE' => 'GASOLIO',
     'EXCELLIUM DIESEL' => 'DIESEL',
@@ -78,6 +79,13 @@ $raggruppamenti_iniziali = [
     'HVO ECOPLUS' => 'HVO',
     'DIESEL HVO ENERGY' => 'HVO',
     'REHVO' => 'HVO',
+    'HVOVOLUTION' => 'HVO',
+    'GASOLIO HVO' => 'HVO',
+    'BCHVO' => 'HVO',
+    'BENZINA SPECIALE 98 OTTANI' => 'BENZINA',
+    'HVO ECO DIESEL' => 'HVO',
+    'HVO FUTURE' => 'HVO',
+    'GASOLIO BIO HVO' => 'HVO',
 ];
 
 $raggruppamenti = [];
@@ -97,6 +105,7 @@ $colori_per_tipo = [
     'METANO' => '#067057',
     'GAS' => '#193e92',
     'L-GNC' => '#193e92',
+    'HVO' => '#ddaa33',
 ];
 
 // Salto le 2 inutili prime righe
@@ -129,8 +138,8 @@ fgetcsv($csvDistributori);
 while (($line = fgetcsv($csvDistributori, 0, ';')) !== false) {
     $idimpianto = $line[0];
     $name = $line[2];
-    $lat = $line[8] !== 'NULL' ? $line[8] : null;
-    $lon = $line[9] !== 'NULL' ? $line[9] : null;
+    $lat = ($line[8] !== 'NULL' && ! empty($line[8])) ? $line[8] : null;
+    $lon = ($line[9] !== 'NULL' && ! empty($line[9])) ? $line[9] : null;
     $description = [];
 
     if (!empty($lat) && !empty($lon)) {
@@ -187,36 +196,37 @@ foreach ($prezzi_per_tipo as $tipo_raggruppato => $idimpianti) {
 
         $markers[] = [
             "type" => "Feature",
-            "properties" => [
-                "idImpianto" => $idimpianto,
-                'description' => "# ".$impianto['nome']."\n*🗓️ ".$impianto['ultimo_aggiornamento']."*\n".implode("\n", $descriptions)."\n\n".$impianto['button'],
-                'name' => $impianto['icon'].' '.min($prezzi).' - '.max($prezzi).' €'
-            ],
             "geometry" => [
-                "type" => "Point",
                 "coordinates" => [
                     $impianto['lon'],
                     $impianto['lat']
-                ]
-            ]
+                ],
+                "type" => "Point",
+            ],
+            "properties" => [
+                'name' => $impianto['icon'].' '.min($prezzi).' - '.max($prezzi).' €',
+                'description' => "# ".$impianto['nome']."\n*🗓️ ".$impianto['ultimo_aggiornamento']."*\n".implode("\n", $descriptions)."\n\n".$impianto['button'],
+            ],
+            'id' => $idimpianto
         ];
     }
 
 
     $layers[] = [
         'type' => 'FeatureCollection',
-        'features' => [
-            $markers
-        ],
+        'features' => $markers,
         '_umap_options' => [
-            'displayOnLoad' => false,
-            'browsable' => true,
             'name' => $tipo_raggruppato,
-            'color' => $colori_per_tipo[$tipo_raggruppato],
             'type' => 'Cluster',
+            'color' => $colori_per_tipo[$tipo_raggruppato],
             'cluster' => [
                 'radius' => 80
-            ]
+            ],
+            'editMode' => 'advanced',
+            'browsable' => true,
+            'inCaption' => false,
+            'remoteData' => [],
+            'displayOnLoad' => false,
         ]
     ];
 }
